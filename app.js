@@ -12,6 +12,7 @@ const config = {
         create,
         update
     },
+   
     physics: {
         default: 'arcade',
         arcade: {
@@ -24,6 +25,8 @@ const config = {
 const game = new Phaser.Game(config)
 
 function preload(){
+
+    this.load.image('background', 'assets/background.jpg');
     this.load.image('ground', 'assets/ground.png')
     this.load.image('island', 'assets/island.png')
     this.load.image('star', 'assets/star.png')
@@ -34,6 +37,12 @@ function preload(){
 }
 
 function create(){
+
+  
+
+    this.add.image(400,300 ,'background');
+
+    
     player = this.physics.add.sprite(380, 500, 'player')
 
     let platforms = this.physics.add.staticGroup()
@@ -83,7 +92,7 @@ function create(){
 
     this.anims.create({
         key: 'right',
-        frames: this.anims.generateFrameNumbers('player', { start: 3, end: 8 }),
+        frames: this.anims.generateFrameNumbers('player', { start: 5, end: 8 }),
         frameRate: 10,
         repeat: -1
     })
@@ -91,8 +100,10 @@ function create(){
     let score = 0
     let scoreText = this.add.text(16, 16, 'Stars: 0', {
         fontSize: '32px',
-        fill: '#000'
+        fill: '#33FFFF',
+        
     })
+    
 
     this.physics.add.overlap(player, stars, (player, star) => {
         star.disableBody(true, true)
